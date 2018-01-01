@@ -1,37 +1,44 @@
 var request = require("request")
 var parser = require("xml2json")
 
-var url = "http://sportsfeeds.bovada.lv/basic/NBA.xml"
+const url = "http://sportsfeeds.bovada.lv/basic/NBA.xml"
 
 function createBet(json, Bets, nbaEventsJson) {
     Bets.findOne({ gameID: nbaEventsJson.ID }, function(error, bet) {
-        if (bet && !error) {
-            //If bet exists, update the spreads
-            console.log(bet.gameTitle + "here");
-        } else {
-            let choiceExists = 'Choice' in nbaEventsJson.Competitor[0].Line;
-            console.log(choiceExists);
-            console.log(nbaEventsJson.NAME)
+        // if (bet && !error) {
+        //     //If bet exists, update the spreads
+        //     // console.log(bet.gameTitle + "here");
+        // } else {
+            let choiceExists = 'Choice' in nbaEventsJson.Competitor[0].Line[0];
+            console.log(choiceExists)
+            console.log(nbaEventsJson.Competitor[0].Line[0].Choice.NUMBER)
+            
+            // console.log(nbaEventsJson.Competitor[0].Line.Choice.NUMBER)
+
             Bets.create({
                 gameID: nbaEventsJson.ID,
                 date: json.Schedule.EventType.Date.DTEXT,
                 gameTitle: nbaEventsJson.NAME,
                 homeTeam: nbaEventsJson.Competitor[0].NAME,
-                homeTeamSpread: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.NUMBER : 'NA',
-                homeTeamLine: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.Odds.Line : 'NA',
-                homeTeamValue: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.VALUE : 'NA',
+                homeTeamSpread: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.NUMBER : 'NA',
+                homeTeamLine: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.Odds.Line : 'NA',
+                homeTeamValue: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.VALUE : 'NA',
+                homeTeamML: choiceExists ? nbaEventsJson.Competitor[0].Line[1].Choice.VALUE : 'NA',
                 awayTeam: nbaEventsJson.Competitor[1].NAME,
-                awayTeamSpread: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.NUMBER : 'NA',
-                awayTeamLine: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.Odds.Line : 'NA',
-                awayTeamValue: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.VALUE : 'NA',
-                origHomeTeamSpread: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.NUMBER : 'NA',
-                origHomeTeamLine: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.Odds.Line : 'NA',
-                origHomeTeamValue: choiceExists ? nbaEventsJson.Competitor[0].Line.Choice.VALUE : 'NA',
-                origAwayTeamSpread: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.NUMBER : 'NA',
-                origAwayTeamLine: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.Odds.Line : 'NA',
-                origAwayTeamValue: choiceExists ? nbaEventsJson.Competitor[1].Line.Choice.VALUE : 'NA'
+                awayTeamSpread: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.NUMBER : 'NA',
+                awayTeamLine: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.Odds.Line : 'NA',
+                awayTeamValue: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.VALUE : 'NA',
+                awayTeamML: choiceExists ? nbaEventsJson.Competitor[1].Line[1].Choice.VALUE : 'NA',
+                origHomeTeamSpread: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.NUMBER : 'NA',
+                origHomeTeamLine: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.Odds.Line : 'NA',
+                origHomeTeamValue: choiceExists ? nbaEventsJson.Competitor[0].Line[0].Choice.VALUE : 'NA',
+                origHomeTeamML: choiceExists ? nbaEventsJson.Competitor[0].Line[1].Choice.VALUE : 'NA',
+                origAwayTeamSpread: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.NUMBER : 'NA',
+                origAwayTeamLine: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.Odds.Line : 'NA',
+                origAwayTeamValue: choiceExists ? nbaEventsJson.Competitor[1].Line[0].Choice.VALUE : 'NA',
+                origAwayTeamML: choiceExists ? nbaEventsJson.Competitor[1].Line[1].Choice.VALUE : 'NA'
             });
-        }
+        // }
     });
 }
 
@@ -54,8 +61,8 @@ exports.bovadaNBA = function() {
                 Bets = mongoose.model('Bets');
 
             for (var i in nbaEventsJson) {
-                console.log(nbaEventsJson[i].NAME)
-                console.log(nbaEventsJson[i].ID)
+                // console.log(nbaEventsJson[i].Competitor[0].Line.ORDER)
+                console.log(nbaEventsJson[i].Competitor[0].Line[0].Choice.NUMBER)
 
                 //Check to see if bet exists in the system
                 //Basically seeing if a new day of bets
