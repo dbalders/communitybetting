@@ -96,7 +96,7 @@ var BetsSchemaNBA = new Schema({
         type: String
     },
     date: {
-        type: Date
+        type: Number
     }
 });
 
