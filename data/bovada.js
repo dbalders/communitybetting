@@ -120,7 +120,7 @@ function createBet(json, Bets, nbaEventsJson) {
 
 			//Create the bet
 			Bets.create({
-				gameID: nbaEventsJson.id,
+				id: nbaEventsJson.id,
 				date: nbaEventsJson.startTime,
 				gameTitle: nbaEventsJson.description,
 				homeTeam: homeTeam,

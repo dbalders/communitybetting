@@ -12,7 +12,7 @@ exports.list_all_betters = function(req, res) {
     Better.find({}, function(err, better) {
         if (err)
             res.send(err);
-        res.json(better);
+        res.json({"posts": better});
     });
 };
 
@@ -20,7 +20,7 @@ exports.list_all_bets = function(req, res) {
     Bets.find({}, function(err, bets) {
         if (err)
             res.send(err);
-        res.json(bets);
+        res.json({'data' : [bets[0]]});
     })
 };
 

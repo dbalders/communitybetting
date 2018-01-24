@@ -38,7 +38,7 @@ var BetsSchemaNBA = new Schema({
     gameTitle: {
         type: String
     },
-    gameID: {
+    id: {
         type: String
     },
     homeTeam: {
