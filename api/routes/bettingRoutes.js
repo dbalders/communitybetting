@@ -1,15 +1,22 @@
 'use strict';
 module.exports = function(app) {
-    var todoList = require('../controllers/bettingController');
-    var betters = require('../controllers/bettingController');
+	var betting = require('../controllers/bettingController');
 
-    // todoList Routes
-    app.route('/betters')
-        .get(betters.list_all_betters)
-        .post(betters.create_a_better);
+	app.route('/api/betters')
+		.get(betting.list_all_betters)
+		.post(betting.create_a_better);
 
-    app.route('/api/bets')
-    	.get(betters.list_all_bets)
-    	.post(betters.get_all_bets)
-    	.delete(betters.delete_all_bets);
+	app.route('/api/bets')
+		.get(betting.list_all_bets)
+		.post(betting.get_all_bets)
+		.delete(betting.delete_all_bets);
+
+	app.route('/api/bets/:betId')
+		.get(betting.list_one_bet)
+		.put(betting.update_a_bet);
+
+	app.route('/api/vote')
+		// .get(betters.list_all_bets)
+		.put(betting.vote_on_a_bet)
+	// .delete(betters.delete_all_bets);
 };

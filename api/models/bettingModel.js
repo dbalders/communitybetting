@@ -41,20 +41,29 @@ var BetsSchemaNBA = new Schema({
     id: {
         type: String
     },
+    sport: {
+        type: String
+    },
+    link: {
+        type: String
+    },
     homeTeam: {
         type: String
     },
     homeTeamSpread: {
         type: String
     },
-    homeTeamLine: {
+    homeTeamSpreadValue: {
         type: String
     },
-    homeTeamValue: {
-        type: String
+    homeTeamSpreadVotes: {
+        type: Number
     },
     homeTeamML: {
         type: String
+    },
+    homeTeamMLVotes: {
+        type: Number
     },
     awayTeam: {
         type: String
@@ -62,22 +71,37 @@ var BetsSchemaNBA = new Schema({
     awayTeamSpread: {
         type: String
     },
-    awayTeamLine: {
+    awayTeamSpreadValue: {
         type: String
     },
-    awayTeamValue: {
-        type: String
+    awayTeamSpreadVotes: {
+        type: Number
     },
     awayTeamML: {
         type: String
     },
+    awayTeamMLVotes: {
+        type: Number
+    },
+    betML: {
+        type: String
+    },
+    betMLOverValue: {
+        type: String
+    },
+    betMLOverVotes: {
+        type: Number
+    },
+    betMLUnderValue: {
+        type: String
+    },
+    betMLUnderVotes: {
+        type: Number
+    },
     origHomeTeamSpread: {
         type: String
     },
-    origHomeTeamLine: {
-        type: String
-    },
-    origHomeTeamValue: {
+    origHomeTeamSpreadValue: {
         type: String
     },
     origHomeTeamML: {
@@ -86,10 +110,7 @@ var BetsSchemaNBA = new Schema({
     origAwayTeamSpread: {
         type: String
     },
-    origAwayTeamLine: {
-        type: String
-    },
-    origAwayTeamValue: {
+    origAwayTeamSpreadValue: {
         type: String
     },
     origAwayTeamML: {

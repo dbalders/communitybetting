@@ -12,7 +12,7 @@ exports.list_all_betters = function(req, res) {
     Better.find({}, function(err, better) {
         if (err)
             res.send(err);
-        res.json({"posts": better});
+        res.json({ "posts": better });
     });
 };
 
@@ -20,21 +20,44 @@ exports.list_all_bets = function(req, res) {
     Bets.find({}, function(err, bets) {
         if (err)
             res.send(err);
-        res.json({'data' : [bets[0]]});
+        res.json({ 'data': bets });
     })
 };
 
 exports.get_all_bets = function(req, res) {
-    // require('./data/bovada', function(err) {
-    //     if (err)
-    //         res.send(err);
-    //     res.json(bets);
-    // });
-    
     bovada.bovadaNBA();
     res.json({ message: 'All bets successfully retreived' });
 
-}
+};
+
+exports.list_one_bet = function(req, res) {
+    Bets.findById(req.params.betId, function(err, bet) {
+        if (err)
+            res.send(err);
+        res.json(bet);
+    });
+};
+
+exports.update_a_bet = function(req, res) {
+    Bets.findOneAndUpdate({ _id: req.params.betId }, req.body, { new: true }, function(err, bet) {
+        if (err)
+            res.send(err);
+        res.json(bet);
+    });
+};
+
+
+exports.vote_on_a_bet = function(req, res) {
+    var data = req.body.data
+    var voteName = data['betVote']
+    console.log(voteName)
+    Bets.findOneAndUpdate({ _id: data['betId'] }, { $inc: { [voteName] : 1 } }, { new: true }, function(err, bet) {
+        console.log(bet)
+        if (err)
+            res.send(err);
+        res.json(bet);
+    });
+};
 
 exports.delete_all_bets = function(req, res) {
     Bets.remove({}, function(err, task) {
