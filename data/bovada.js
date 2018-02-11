@@ -58,9 +58,9 @@ function createBet(json, Bets, nbaEventsJson) {
 			var awayTeamML = "";
 			var overLine = "";
 			var underLine = "";
-			var betML = "";
-			var betMLOverValue = "";
-			var betMLUnderValue = "";
+			var betOU = "";
+			var betOUOverValue = "";
+			var betOUUnderValue = "";
 
 			//If the point spread exists, set the variables 
 			if (betsList[0]) {
@@ -87,10 +87,15 @@ function createBet(json, Bets, nbaEventsJson) {
 					}
 				}
 				if (betsList[2]) {
-					// console.log('here')
-					betML = nbaEventsJson.displayGroups[0].itemList[2].outcomes[0].price.handicap;
-					betMLOverValue = nbaEventsJson.displayGroups[0].itemList[2].outcomes[0].price.american;
-					betMLUnderValue = nbaEventsJson.displayGroups[0].itemList[2].outcomes[1].price.american;
+					if (betsList[1]) {
+						betOU = nbaEventsJson.displayGroups[0].itemList[2].outcomes[0].price.handicap;
+						betOUOverValue = nbaEventsJson.displayGroups[0].itemList[2].outcomes[0].price.american;
+						betOUUnderValue = nbaEventsJson.displayGroups[0].itemList[2].outcomes[1].price.american;
+					} else {
+						betOU = nbaEventsJson.displayGroups[0].itemList[1].outcomes[0].price.handicap;
+						betOUOverValue = nbaEventsJson.displayGroups[0].itemList[1].outcomes[0].price.american;
+						betOUUnderValue = nbaEventsJson.displayGroups[0].itemList[1].outcomes[1].price.american;
+					}
 				}
 			}
 
@@ -102,22 +107,24 @@ function createBet(json, Bets, nbaEventsJson) {
 				date: nbaEventsJson.startTime,
 				gameTitle: nbaEventsJson.description,
 				homeTeam: homeTeam,
+				homeTeamAbbr: nbaEventsJson.competitors[0].abbreviation,
 				homeTeamSpread: homeTeamSpread,
 				homeTeamSpreadValue: homeTeamSpreadValue,
 				homeTeamSpreadVotes: 0,
 				homeTeamML: homeTeamML,
 				homeTeamMLVotes: 0,
 				awayTeam: awayTeam,
+				awayTeamAbbr: nbaEventsJson.competitors[1].abbreviation,
 				awayTeamSpread: awayTeamSpread,
 				awayTeamSpreadValue: awayTeamSpreadValue,
 				awayTeamSpreadVotes: 0,
 				awayTeamML: awayTeamML,
 				awayTeamMLVotes: 0,
-				betML: betML,
-				betMLOverValue: betMLOverValue,
-				betMLOverVotes: 0,
-				betMLUnderValue: betMLUnderValue,
-				betMLUnderVotes: 0,
+				betOU: betOU,
+				betOUOverValue: betOUOverValue,
+				betOUOverVotes: 0,
+				betOUUnderValue: betOUUnderValue,
+				betOUUnderVotes: 0,
 				origHomeTeamSpread: homeTeamSpread,
 				origHomeTeamSpreadValue: homeTeamSpreadValue,
 				origHomeTeamML: homeTeamML,
@@ -135,6 +142,7 @@ function createBet(json, Bets, nbaEventsJson) {
 function checkBets(nbaEventsJson) {
 	var hasPointSpread = false;
 	var hasML = false;
+	var hasOU = false;
 
 	nbaEventsJson.displayGroups[0].itemList.forEach(function(item) {
 		//If the point spread exists, set variable to true

@@ -3,7 +3,7 @@ function vote() {
 		
 		var sendData = {
 			'betId': $(this).attr('data-id'),
-			'betVote': $(this).attr('data-vote')
+			'betVote': $(this).attr('data-title')
 		}
 
 		$.ajax({

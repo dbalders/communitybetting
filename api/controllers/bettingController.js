@@ -21,7 +21,7 @@ exports.list_all_bets = function(req, res) {
         if (err)
             res.send(err);
         res.json({ 'data': bets });
-    })
+    }).sort({date : 1})
 };
 
 exports.get_all_bets = function(req, res) {

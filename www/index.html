@@ -6,14 +6,42 @@
 	<title>Betting Lines</title>
 	<!-- <meta name="description" content="The HTML5 Herald"> -->
 	<!-- <meta name="author" content="SitePoint"> -->
-	<!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+	<link rel="stylesheet" href="css/styles.css?v=1.0">
 </head>
 
 <body>
-
+	<div class="bet-list-container flex">
+		<div class="bet-container flex-vertical">
+			<div class="bet-title">
+				<a data="bet-title"></a>
+			</div>
+			<div class="bets-container flex">
+				<div class="bets-away flex-vertical">
+					<div data-title="awayTeamAbbr" data-id=""></div>
+					<div data-title='awayTeamSpreadVotes' data-id=""></div>
+					<div data-title='awayTeamMLVotes' data-id=""></div>
+					<div data-title='betMLUnderVotes' data-id=""></div>
+					<div data-title='betOUUnderVotes' data-id="" class="flex">
+						<div data-title="betOU"></div>
+						<div data-title="betOUUnderValue"></div>
+					</div>
+				</div>
+				<div class="bets-home flex-vertical">
+					<div data-title="homeTeamAbbr" data-id=""></div>
+					<div data-title='homeTeamSpreadVotes' data-id=""></div>
+					<div data-title='homeTeamMLVotes' data-id=""></div>
+					<div data-title='betMLOverVotes' data-id=""></div>
+					<div data-title='betOUOverVotes' data-id="" class="flex">
+						<div data-title="betOU"></div>
+						<div data-title="betOUOverValue"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="./js/getData.js"></script>
 <script src="./js/voting.js"></script>
+
 </html>

@@ -50,6 +50,9 @@ var BetsSchemaNBA = new Schema({
     homeTeam: {
         type: String
     },
+    homeTeamAbbr: {
+        type: String
+    },
     homeTeamSpread: {
         type: String
     },
@@ -68,6 +71,9 @@ var BetsSchemaNBA = new Schema({
     awayTeam: {
         type: String
     },
+    awayTeamAbbr: {
+        type: String
+    },
     awayTeamSpread: {
         type: String
     },
@@ -83,19 +89,19 @@ var BetsSchemaNBA = new Schema({
     awayTeamMLVotes: {
         type: Number
     },
-    betML: {
+    betOU: {
         type: String
     },
-    betMLOverValue: {
+    betOUOverValue: {
         type: String
     },
-    betMLOverVotes: {
+    betOUOverVotes: {
         type: Number
     },
-    betMLUnderValue: {
+    betOUUnderValue: {
         type: String
     },
-    betMLUnderVotes: {
+    betOUUnderVotes: {
         type: Number
     },
     origHomeTeamSpread: {
