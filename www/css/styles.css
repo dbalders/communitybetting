@@ -79,3 +79,61 @@ body {
 .hide {
     display: none;
 }
+
+
+/*
+ * Home Page Styles
+ */
+
+.bet-list-container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.bet-list-container .bet-container {
+    width: 45%;
+    margin: 2.5%;
+}
+
+.bets-container {
+    width: 100%;
+}
+
+.bets-container .bets-away,
+.bets-container .bets-home {
+    width: 45%;
+    margin: 2.5%;
+}
+
+.vote-container {
+    margin: 5px;
+}
+
+.vote {
+    min-width: 150px;
+    padding: 5px;
+    background: lightblue;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+     -webkit-user-select: none;
+}
+
+.vote-number {
+    margin-right: auto;
+}
+
+.vote-abbr-left {
+    margin-left: auto;
+    width: 150px;
+    padding: 5px;
+}
+
+.vote-abbr-right {
+    margin-right: auto;
+    width: 150px;
+    padding: 5px;
+}

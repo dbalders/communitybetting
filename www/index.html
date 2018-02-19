@@ -10,30 +10,46 @@
 </head>
 
 <body>
-	<div class="bet-list-container flex">
-		<div class="bet-container flex-vertical">
+	<div class="bet-list-container flex flex-wrap">
+		<div class="bet-container flex-vertical center">
 			<div class="bet-title">
 				<a data="bet-title"></a>
 			</div>
-			<div class="bets-container flex">
+			<div class="bets-container flex center" data-id="">
 				<div class="bets-away flex-vertical">
-					<div data-title="awayTeamAbbr" data-id=""></div>
-					<div data-title='awayTeamSpreadVotes' data-id=""></div>
-					<div data-title='awayTeamMLVotes' data-id=""></div>
-					<div data-title='betMLUnderVotes' data-id=""></div>
-					<div data-title='betOUUnderVotes' data-id="" class="flex">
-						<div data-title="betOU"></div>
-						<div data-title="betOUUnderValue"></div>
+					<div data-title="awayTeamAbbr" data-id="" class="vote-abbr-left"></div>
+					<div class="vote-container flex">
+						<div data-title="awayTeamSpreadVotes" class="vote-number center"></div>
+						<div data-title='awayTeamSpread' data-vote-title="awayTeamSpreadVotes" data-id="" class="vote"></div>
+					</div>
+					<div class="vote-container flex">
+						<div data-title="awayTeamMLVotes" class="vote-number center"></div>
+						<div data-title='awayTeamML' data-vote-title="awayTeamMLVotes" data-id="" class="vote"></div>
+					</div>
+					<div class="vote-container flex">
+						<div data-title="betOUUnderVotes" class="vote-number center"></div>
+						<div data-title='betOUUnder' data-vote-title="betOUUnderVotes" data-id="" class="flex vote flex-center">
+							<div data-title="betOU"></div>
+							<div data-title="betOUUnderValue"></div>
+						</div>
 					</div>
 				</div>
 				<div class="bets-home flex-vertical">
-					<div data-title="homeTeamAbbr" data-id=""></div>
-					<div data-title='homeTeamSpreadVotes' data-id=""></div>
-					<div data-title='homeTeamMLVotes' data-id=""></div>
-					<div data-title='betMLOverVotes' data-id=""></div>
-					<div data-title='betOUOverVotes' data-id="" class="flex">
-						<div data-title="betOU"></div>
-						<div data-title="betOUOverValue"></div>
+					<div data-title="homeTeamAbbr" data-id="" class="vote-abbr-right"></div>
+					<div class="vote-container flex">
+						<div data-title='homeTeamSpread' data-vote-title="homeTeamSpreadVotes" data-id="" class="vote"></div>
+						<div data-title="homeTeamSpreadVotes" class="vote-number center"></div>
+					</div>
+					<div class="vote-container flex">
+						<div data-title='homeTeamML' data-vote-title="homeTeamMLVotes" data-id="" class="vote"></div>
+						<div data-title="homeTeamMLVotes" class="vote-number center"></div>
+					</div>
+					<div class="vote-container flex">
+						<div data-title='betOUUnder' data-vote-title="betOUOverVotes" data-id="" class="flex vote flex-center">
+							<div data-title="betOU"></div>
+							<div data-title="betOUOverValue"></div>
+						</div>
+						<div data-title="betOUOverVotes" class="vote-number center"></div>
 					</div>
 				</div>
 			</div>
@@ -41,7 +57,14 @@
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="./js/getData.js"></script>
 <script src="./js/voting.js"></script>
+<script src="./js/getData.js"></script>
+<script>
+$(document).ready(function() {
+	var update = false;
+	getData(update);
+	vote();
+});
+</script>
 
 </html>

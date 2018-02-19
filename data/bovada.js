@@ -50,17 +50,17 @@ function createBet(json, Bets, nbaEventsJson) {
 
 			var homeTeam = nbaEventsJson.competitors[0].description;
 			var awayTeam = nbaEventsJson.competitors[1].description;
-			var homeTeamSpread = "";
-			var awayTeamSpread = "";
-			var homeTeamSpreadValue = "";
-			var awayTeamSpreadValue = "";
-			var homeTeamML = "";
-			var awayTeamML = "";
-			var overLine = "";
-			var underLine = "";
-			var betOU = "";
-			var betOUOverValue = "";
-			var betOUUnderValue = "";
+			var homeTeamSpread = "NA";
+			var awayTeamSpread = "NA";
+			var homeTeamSpreadValue = "NA";
+			var awayTeamSpreadValue = "NA";
+			var homeTeamML = "NA";
+			var awayTeamML = "NA";
+			var overLine = "NA";
+			var underLine = "NA";
+			var betOU = "NA";
+			var betOUOverValue = "NA";
+			var betOUUnderValue = "NA";
 
 			//If the point spread exists, set the variables 
 			if (betsList[0]) {
