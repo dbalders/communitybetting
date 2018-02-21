@@ -113,13 +113,17 @@ body {
 .vote {
     min-width: 150px;
     padding: 5px;
-    background: lightblue;
+    background: #adadad;
     color: white;
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
     user-select: none;
      -webkit-user-select: none;
+}
+
+.vote-selected {
+    background-color: #00FF00;
 }
 
 .vote-number {
@@ -136,4 +140,8 @@ body {
     margin-right: auto;
     width: 150px;
     padding: 5px;
+}
+
+.betOU div:first-of-type {
+    padding-right: 10px;
 }

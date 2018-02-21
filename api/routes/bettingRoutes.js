@@ -18,5 +18,5 @@ module.exports = function(app) {
 	app.route('/api/vote')
 		// .get(betters.list_all_bets)
 		.put(betting.vote_on_a_bet)
-	// .delete(betters.delete_all_bets);
+		.delete(betting.delete_vote_on_a_bet);
 };
