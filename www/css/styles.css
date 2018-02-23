@@ -81,6 +81,7 @@ body {
 }
 
 
+
 /*
  * Home Page Styles
  */
@@ -88,7 +89,7 @@ body {
 .bet-list-container {
     width: 100%;
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1200px;
 }
 
 .bet-list-container .bet-container {
@@ -119,7 +120,7 @@ body {
     text-align: center;
     cursor: pointer;
     user-select: none;
-     -webkit-user-select: none;
+    -webkit-user-select: none;
 }
 
 .vote-selected {
@@ -129,6 +130,15 @@ body {
 .vote-number {
     margin-right: auto;
 }
+
+.bets-away .vote-number {
+    padding-right: 5px;
+}
+
+.bets-home .vote-number {
+    padding-left: 5px;
+}
+
 
 .vote-abbr-left {
     margin-left: auto;

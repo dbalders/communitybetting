@@ -1,6 +1,10 @@
 function vote() {
 	$('.vote').click(function() {
 
+		var voteData = [];
+
+		voteData.push($(this).attr('data-id'), $(this).attr('data-title'));
+
 		var sendData = {
 			'betId': $(this).attr('data-id'),
 			'betVote': $(this).attr('data-vote-title')
@@ -19,6 +23,7 @@ function vote() {
 					var update = true;
 					getData(update);
 					voteButton.addClass('vote-selected');
+					addToLocalStorage(voteData, 'selectedVotes');
 				}
 			});
 		} else {
@@ -32,6 +37,7 @@ function vote() {
 					var update = true;
 					getData(update);
 					voteButton.removeClass('vote-selected');
+					removeFromLocalStorage(voteData, 'selectedVotes');
 				}
 			});
 		}

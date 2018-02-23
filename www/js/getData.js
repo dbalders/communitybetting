@@ -17,14 +17,15 @@ function getData(update) {
 				var betHTML = $('.bet-list-container')
 				for (var y = 0; y < Object.keys(bet).length; y++) {
 					// console.log(Object.keys(bet)[y])
-					if( Object.keys(bet)[y].indexOf('Votes') >= 0){
+					if (Object.keys(bet)[y].indexOf('Votes') >= 0) {
 						$(betHTML).find('[data-title=' + Object.keys(bet)[y] + '][data-id=' + bet._id + ']').text(Object.values(bet)[y]);
 					}
-					// $(betHTML).find('[data-title=' + Object.keys(bet)[y] + '][data-id=' + bet._id + ']').text(Object.values(bet)[y]);
 				}
 			}
 
 		});
+	}).done(function() {
+		loadSelectedVotes('selectedVotes');
 	});
 }
 
@@ -56,13 +57,47 @@ function buildBets(bet, firstTime) {
 	$(betHTML).find('[data-title=betOUOver]').attr('data-id', bet._id);
 	$(betHTML).find('[data-title=betOUOverValue]').text("(" + bet.betOUOverValue + ")").attr('data-id', bet._id);
 	$(betHTML).find('[data-title=betOUOverVotes]').text(bet.betOUOverVotes).attr('data-id', bet._id);
-	// $('body').append("<p><a href='https://sports.bovada.lv" + bet.link + "'>" + bet.gameTitle + "</a></p>");
-	// $('body').append("<p><span>" + bet.awayTeamAbbr + "</span> <span data-vote='awayTeamSpreadVotes' data-id='" + bet._id + "'>" + bet.awayTeamSpread + "</span> <span>" + bet.awayTeamSpreadValue + "</span> <span data-vote='awayTeamMLVotes' data-id='" + bet._id + "'>" + bet.awayTeamML + "</span> <span data-vote='betMLUnderVotes' data-id='" + bet._id + "'>" + bet.betML + " " + bet.betMLUnderValue + "</span></p>");
-	// $('body').append("<p><span>" + bet.homeTeamAbbr + "</span> <span data-vote='homeTeamSpreadVotes' data-id='" + bet._id + "'>" + bet.homeTeamSpread + "</span> <span>" + bet.homeTeamSpreadValue + "</span> <span data-vote='homeTeamMLVotes' data-id='" + bet._id + "'>" + bet.homeTeamML + "</span> <span data-vote='betMLOverVotes' data-id='" + bet._id + "'>" + bet.betML + " " + bet.betMLOverValue + "</span></p>");
 }
 
-function updateData() {
+function addToLocalStorage(vote, cookieName) {
+	var storageArray = [];
+	if (JSON.parse(localStorage.getItem(cookieName)) !== null) {
+		storageArray = JSON.parse(localStorage.getItem(cookieName));
+	}
+
+	storageArray.push(vote);
+	localStorage.setItem(cookieName, JSON.stringify(storageArray));
+}
+
+function removeFromLocalStorage(vote, cookieName) {
+	var storageArray = [];
+
+	if (JSON.parse(localStorage.getItem(cookieName)) !== null) {
+		storageArray = JSON.parse(localStorage.getItem(cookieName));
+	}
+
+	var itemToRemove = storageArray.indexOf(vote);
+
+	for (i = 0; i < storageArray.length; i++) {
+		if (storageArray[i][0] === vote[0] && storageArray[i][1] === vote[1]) {
+			storageArray.splice(i, 1);
+			localStorage.setItem(cookieName, JSON.stringify(storageArray));
+		}
+	}
+}
+
+function loadSelectedVotes(cookieName) {
+	var storageArray = [];
+	storageArray = JSON.parse(localStorage.getItem(cookieName));
+
+	for (i = 0; i < storageArray.length; i++) {
+		var voteContainer = $('.bet-container').find('[data-id=' + storageArray[i][0] + ']');
+		var selectedVote = $(voteContainer).find('[data-title=' + storageArray[i][1] + ']');
+		console.log($(selectedVote))
+		$(selectedVote).addClass('vote-selected');
+	}
 
 }
 
-// console.log(data)
+
+
