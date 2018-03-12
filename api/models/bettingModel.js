@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var bcrypt = require('bcrypt');
 
 var TaskSchema = new Schema({
     name: {
@@ -21,18 +21,51 @@ var TaskSchema = new Schema({
     }
 });
 
-var BettersSchema = new Schema({
-    email: {
-        type: String
-    },
-    Created_date: {
-        type: Date,
-        default: Date.now
-    },
-    twitter: {
-        type: String
-    }
+var UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  passwordConf: {
+    type: String,
+    required: true,
+  }
 });
+
+
+//hashing a password before saving it to the database
+UserSchema.pre('save', function (next) {
+  var user = this;
+  bcrypt.hash(user.password, 10, function (err, hash){
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  })
+  bcrypt.hash(user.passwordConf, 10, function (err, hash){
+    if (err) {
+      return next(err);
+    }
+    user.passwordConf = hash;
+    next();
+  })
+});
+
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
 
 var BetsSchemaNBA = new Schema({
     gameTitle: {
@@ -128,5 +161,5 @@ var BetsSchemaNBA = new Schema({
 });
 
 module.exports = mongoose.model('Tasks', TaskSchema);
-module.exports = mongoose.model('Betters', BettersSchema);
+// module.exports = mongoose.model('Betters', BettersSchema);
 module.exports = mongoose.model('Bets', BetsSchemaNBA);

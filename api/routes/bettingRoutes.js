@@ -19,4 +19,10 @@ module.exports = function(app) {
 		// .get(betters.list_all_bets)
 		.put(betting.vote_on_a_bet)
 		.delete(betting.delete_vote_on_a_bet);
+
+	app.route('/api/register')
+		.post(betting.create_a_better)
+
+	app.route('/api/login')
+		.post(betting.better_login)
 };
