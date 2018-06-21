@@ -1,7 +1,8 @@
 var bets = [];
+var currentURL = window.location.href;
 
 function getData(update) {
-	$.getJSON("http://localhost:3000/api/bets/", function(data) {
+	$.getJSON(currentURL + "api/bets/", function(data) {
 		bets = data.data
 		var firstTime = true;
 		$.each(bets, function(key, bet) {

@@ -5,7 +5,8 @@ var bovada = require('../../data/bovada');
 
 var mongoose = require('mongoose'),
     Task = mongoose.model('Tasks'),
-    User = mongoose.model('User'),
+    LocalUser = mongoose.model('LocalUser'),
+    GoogleUser = mongoose.model('GoogleUser'),
     Bets = mongoose.model('Bets');
 
 exports.list_all_betters = function(req, res) {
@@ -101,7 +102,7 @@ exports.create_a_better = function(req, res) {
             passwordConf: req.body.passwordConf,
         }
         //use schema.create to insert data into the db
-        User.create(userData, function(err, user) {
+        LocalUser.create(userData, function(err, user) {
             console.log('here')
             if (err) {
                 console.log(err)
@@ -114,27 +115,41 @@ exports.create_a_better = function(req, res) {
     // res.send(req.body.email);
 };
 
+// exports.google_user_login = function(passport, GoogleStrategy) {
+//     console.log('here')
+//     //start google
+
+//     // var passport = require('passport');
+//     // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+//     // Use the GoogleStrategy within Passport.
+//     //   Strategies in passport require a `verify` function, which accept
+//     //   credentials (in this case, a token, tokenSecret, and Google profile), and
+//     //   invoke a callback with a user object.
+//     passport.use(new GoogleStrategy({
+//             clientID: '262564360953-cbrp16c0mmatnofuf4sftkknenvknaac.apps.googleusercontent.com',
+//             clientSecret: 'BDm6MkYz9GFeB967R_W7Z1BN',
+//             callbackURL: "http://localhost:3000/auth/google/callback"
+//         },
+//         function(accessToken, refreshToken, profile, done) {
+//             console.log('here');
+//             console.log(profile)
+//             var googleUserData = {
+//                 email: profile.emails[0],
+//                 name: profile.displayName,
+//                 googleId: profile.id
+//             }
+//             GoogleUser.findOrCreate({ googleId: profile.id }, function(err, user) {
+//                 return done(err, user);
+//             });
+//         }
+//     ));
+
+//     //end google
+// }
+
 exports.better_login = function(req, res) {
-    //authenticate input against database
-    UserSchema.statics.authenticate = function(email, password, callback) {
-        User.findOne({ email: email })
-            .exec(function(err, user) {
-                if (err) {
-                    return callback(err)
-                } else if (!user) {
-                    var err = new Error('User not found.');
-                    err.status = 401;
-                    return callback(err);
-                }
-                bcrypt.compare(password, user.password, function(err, result) {
-                    if (result === true) {
-                        return callback(null, user);
-                    } else {
-                        return callback();
-                    }
-                })
-            });
-    }
+
 }
 
 exports.read_a_task = function(req, res) {

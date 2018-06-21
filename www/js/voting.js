@@ -1,4 +1,6 @@
 function vote() {
+	var currentURL = window.location.href;
+
 	$('.vote').click(function() {
 
 		var voteData = [];
@@ -14,7 +16,7 @@ function vote() {
 
 		if (!voteButton.hasClass('vote-selected')) {
 			$.ajax({
-				url: 'http://localhost:3000/api/vote', //Your api url
+				url: currentURL + 'api/vote', //Your api url
 				type: 'PUT', //type is any HTTP method
 				data: {
 					data: sendData
@@ -28,7 +30,7 @@ function vote() {
 			});
 		} else {
 			$.ajax({
-				url: 'http://localhost:3000/api/vote', //Your api url
+				url: currentURL + 'api/vote', //Your api url
 				type: 'DELETE', //type is any HTTP method
 				data: {
 					data: sendData
