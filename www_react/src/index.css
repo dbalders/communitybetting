@@ -1,0 +1,157 @@
+/*
+ * Global Styles
+ */
+
+body {
+    font-size: 1.7rem;
+    /*font-family: cormorant,'Open Sans',sans-serif;*/
+}
+
+.flex-wrapper {
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    justify-content: center;
+    -webkit-justify-content: center;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    @media (max-width: 700px) {
+        flex-direction: column;
+        -webkit-flex-direction: column;
+    }
+}
+
+.flex-content {
+    flex: 3;
+    -webkit-flex: 3;
+    -ms-flex: 3 0 auto;
+}
+
+.flex {
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+}
+
+.flex-vertical {
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+}
+
+.flex-one {
+    flex: 1 0 auto;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+
+.flex-center {
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+}
+
+#content {
+    /*idth: 100%;
+    margin: 25px 10px;
+    @media (max-width: 700px) {
+        flex-direction: column;
+        -webkit-flex-direction: column;
+    }*/
+}
+
+.hide {
+    display: none;
+}
+
+
+
+/*
+ * Home Page Styles
+ */
+
+.bet-list-container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.bet-list-container .bet-container {
+    width: 45%;
+    margin: 2.5%;
+}
+
+.bets-container {
+    width: 100%;
+}
+
+.bets-container .bets-away,
+.bets-container .bets-home {
+    width: 45%;
+    margin: 2.5%;
+}
+
+.vote-container {
+    margin: 5px;
+}
+
+.vote {
+    min-width: 150px;
+    padding: 5px;
+    background: #adadad;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.vote-selected {
+    background-color: #00FF00;
+}
+
+.vote-number {
+    margin-right: auto;
+}
+
+.bets-away .vote-number {
+    padding-right: 5px;
+}
+
+.bets-home .vote-number {
+    padding-left: 5px;
+}
+
+
+.vote-abbr-left {
+    margin-left: auto;
+    width: 150px;
+    padding: 5px;
+}
+
+.vote-abbr-right {
+    margin-right: auto;
+    width: 150px;
+    padding: 5px;
+}
+
+.betOU div:first-of-type {
+    padding-right: 10px;
+}
