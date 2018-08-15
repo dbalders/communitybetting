@@ -16,7 +16,7 @@ module.exports = function(app) {
 		.put(betting.update_a_bet);
 
 	app.route('/api/vote')
-		// .get(betters.list_all_bets)
+		// .get(betting.list_all_bets)
 		.put(betting.vote_on_a_bet)
 		.delete(betting.delete_vote_on_a_bet);
 };

@@ -172,12 +172,9 @@ function deleteBets(Bets) {
 	Bets.find({}, function(error, bets) {
 		for (var i in bets) {
 			if (bets[i].date < currentTime) {
-				console.log(bets[i]._id);
 				// Bets.find({id: bets[i].id}).remove(); //not removing the bet
 				// console.log('removed');
 				Bets.findByIdAndRemove(bets[i]._id, (err, todo) => {
-					// We'll create a simple object to send back with a message and the id of the document that was removed
-					// You can really do this however you want, though.
 					let response = {
 						message: "Bet successfully deleted",
 						id: bets[i].gameTitle
