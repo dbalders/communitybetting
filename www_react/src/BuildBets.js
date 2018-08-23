@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 
 export class BuildBets extends Component {
+	constructor(props){
+	    super(props);
+	}
+
     state = {
         gameData: []
     }
+
+    getInitialState(){
+	  return {"voted":"notVoted"};
+	}
 
     componentDidMount() {
         this.callApi()
@@ -70,10 +78,42 @@ export class BuildBets extends Component {
         return body;
     };
 
-    vote = (e, data) => {
-    	console.log(e);
+    toggleVoted() {
+    	console.log('here')
+	    var css = (this.props.voted === "notVoted") ? "vote-selected" : "notVoted";
+	    this.setState({"voted":css});
+	}
+
+    vote(e, data) {
+    	console.log(e.target.getAttribute('data-title'));
     	console.log(data);
 
+    	var sendData = {
+			'betId': e.target.getAttribute('data-id'),
+			'betVote': e.target.getAttribute('data-vote-title')
+		}
+
+		var voteButton = e.target;
+
+    	fetch('/api/vote', {
+		  method: 'PUT',
+		  headers: {
+		    Accept: 'application/json',
+		    'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+		    data: sendData
+		  }),
+		})
+		.then(function(response) {
+		    return response.json();
+		  })
+		.then(function(myJson) {
+		    // console.log(JSON.stringify(myJson));
+		    console.log(voteButton);
+		    this.toggleVoted.bind(this)
+		  })
+		.catch(err => console.log(err));
     }
 
     render() {
