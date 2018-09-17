@@ -50,9 +50,15 @@ exports.vote_on_a_bet = function(req, res) {
     var data = req.body.data
     var voteName = data['betVote']
     Bets.findOneAndUpdate({ _id: data['betId'] }, { $inc: { [voteName] : 1 } }, { new: true }, function(err, bet) {
+        console.log(bet);
         if (err)
             res.send(err);
-        res.json(bet);
+        // res.json(bet);
+        Bets.find({}, function(err, bets) {
+            if (err)
+                res.send(err);
+            res.json({ 'data': bets });
+        }).sort({date : 1})
     });
 };
 
