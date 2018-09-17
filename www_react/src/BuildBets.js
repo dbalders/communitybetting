@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { VotedCSS } from './voted';
 
 export class BuildBets extends Component {
 	constructor(props){
 	    super(props);
+	    this.state = {voted: "notVoted"};
 	}
 
     state = {
-        gameData: []
+        gameData: [],
     }
 
     getInitialState(){
@@ -14,6 +16,7 @@ export class BuildBets extends Component {
 	}
 
     componentDidMount() {
+    	console.log(this.state.voted);
         this.callApi()
             .then(results => {
                 let gameData = results.data.map((gameData) => {
@@ -27,7 +30,7 @@ export class BuildBets extends Component {
                                     <div data-title="awayTeamAbbr" data-id={gameData._id} className="vote-abbr-left">{gameData.awayTeamAbbr}</div>
                                     <div className="vote-container flex">
                                         <div data-title="awayTeamSpreadVotes" className="vote-number center">{gameData.awayTeamSpreadVotes}</div>
-                                        <div data-title='awayTeamSpread' data-vote-title="awayTeamSpreadVotes" data-id={gameData._id} className="vote" onClick={((e) => this.vote(e, gameData))}>{gameData.awayTeamSpread}</div>
+                                        <div data-title='awayTeamSpread' data-vote-title="awayTeamSpreadVotes" data-id={gameData._id} className={`vote ${this.state.voted}`} onClick={((e) => this.vote(e, gameData)).bind(this)}>{gameData.awayTeamSpread}</div>
                                     </div>
                                     <div className="vote-container flex">
                                         <div data-title="awayTeamMLVotes" className="vote-number center">{gameData.awayTeamMLVotes}</div>
@@ -79,14 +82,23 @@ export class BuildBets extends Component {
     };
 
     toggleVoted() {
-    	console.log('here')
+    	console.log(this.props.voted)
 	    var css = (this.props.voted === "notVoted") ? "vote-selected" : "notVoted";
+	    console.log(css)
 	    this.setState({"voted":css});
+	    console.log(this.voted)
 	}
 
     vote(e, data) {
     	console.log(e.target.getAttribute('data-title'));
     	console.log(data);
+    	console.log(e.target.className)
+    	console.log(e)
+    	console.log(this.state.voted)
+    	var css = (this.state.voted === "notVoted") ? "vote-selected" : "notVoted";
+    	console.log(css)
+	    this.setState({"voted":css}, function() {console.log(this.state.voted)});
+	    
 
     	var sendData = {
 			'betId': e.target.getAttribute('data-id'),
@@ -110,8 +122,12 @@ export class BuildBets extends Component {
 		  })
 		.then(function(myJson) {
 		    // console.log(JSON.stringify(myJson));
-		    console.log(voteButton);
-		    this.toggleVoted.bind(this)
+		    // console.log(voteButton);
+		    // {VotedCSS.toggleVoted}
+		    // <toggleVoted this/>;
+		    // console.log('after')
+		    // var css = (this.props.voted === "notVoted") ? "vote-selected" : "notVoted";
+    		// this.setState({"voted":css});
 		  })
 		.catch(err => console.log(err));
     }

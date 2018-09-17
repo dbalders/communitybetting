@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 
-class Voted extends Component {
-    toggleClass = () => {
-        const oldClassName = document.getElementById('test').className;
-        const newClassName = oldClassName === 'red' ? 'blue' : 'red'
-        document.getElementById('test').className = newClassName
+export class VotedCSS extends Component {
+
+    constructor(props){
+        super(props);
+        this.toggleVoted = this.toggleVoted.bind(this);
+    }
+
+    toggleVoted() {
+        console.log('here')
+        var css = (this.props.voted === "notVoted") ? "vote-selected" : "notVoted";
+        this.setState({"voted":css});
     }
 
     render() {
-        return ( <
-            div >
-            <
-            p >
-            click toggle to change colors below <
-            /p> <
-            button onClick = { this.toggleClass } > toggle < /button> <
-            /div>
-        );
+        return;
     }
 }
