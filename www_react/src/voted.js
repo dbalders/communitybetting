@@ -8,14 +8,11 @@ class Voted extends Component {
     }
 
     render() {
-        return ( <
-            div >
-            <
-            p >
-            click toggle to change colors below <
-            /p> <
-            button onClick = { this.toggleClass } > toggle < /button> <
-            /div>
+        return ( 
+            <div>
+                <p>click toggle to change colors below </p> 
+                <button onClick = { this.toggleClass } > toggle </button> 
+            </div>
         );
     }
 }
