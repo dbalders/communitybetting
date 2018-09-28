@@ -4,21 +4,27 @@ export class BuildBets extends Component {
 	constructor(props){
 	    super(props);
 	    this.state = {
-            isVoted: false
+            isVoted: false,
+            games: this.props.gameData
         }
 	}
 
     toggleVoted() {
-    	console.log('here')
+    	// console.log('here')
 	    var css = (this.props.voted === "notVoted") ? "vote-selected" : "notVoted";
 	    this.setState({"voted":css});
 	}
 
     render() {
+    	console.log(this.state.games)
+    	this.state.games = [] = this.props.gameData;
       	return (
 	        <div className="bet-list-container flex flex-wrap">
 	            {
-	            	this.props.gameData.map((gameData) => {
+	            	this.props.gameData.map((gameData, i) => {
+	            		// gameData.voted = [false, false, false, false, false, false];
+	            		// console.log(this.state.games[i].voted[2])
+	            		// this.setState({games: gameData})
 			            return (
 			                <div className="bet-container flex-vertical center" key={gameData.id} id={gameData.id}>
 			                    <div className="bet-title">
@@ -33,12 +39,23 @@ export class BuildBets extends Component {
 			                            </div>
 			                            <div className="vote-container flex">
 			                                <div data-title="awayTeamMLVotes" className="vote-number center">{gameData.awayTeamMLVotes}</div>
-			                                <div data-title='awayTeamML' data-vote-title="awayTeamMLVotes" data-id={gameData._id} className={`vote ${(this.state.isVoted) ? 'vote-selected' : null}`} 
+			                                <div data-title='awayTeamML' data-vote-title="awayTeamMLVotes" data-key='1' data-id={gameData._id} className={`vote ${(this.state.games[i].voted[2]) ? 'vote-selected' : null}`} 
 			                                	onClick={(e) => {
 			                                		this.props.vote(e, gameData);
-			                                		this.setState({ isVoted: !this.state.isVoted })
+			                                		// this.setState({ isVoted: !this.state.isVoted });
+			                                		// console.log(gameData.voted[2])
+			                                		// gameData.voted[2] = !gameData.voted[2];
+			                                		var currentGameData = this.state.games;
+			                                		// console.log(currentGameData[i].voted[2])
+			                                		currentGameData[i].voted[1] = !gameData.voted[1]
+			                                		// console.log(currentGameData[i].voted[2])
+			                                		
+			                                		this.setState({ games: currentGameData })
+
+			                                		// console.log(this.state.games[i].voted[2])
+
 			                                	}}
-			                                	>{gameData.awayTeamML}
+			                                >{gameData.awayTeamML}
 			                                </div>
 			                            </div>
 			                            <div className="vote-container flex">
